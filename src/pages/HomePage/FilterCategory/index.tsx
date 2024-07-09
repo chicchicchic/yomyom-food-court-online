@@ -36,7 +36,8 @@ const FilterCategory: React.FC<FilterCategoryProps> = ({ handleChangeSelectedCat
           setCategories([]);
         } else {
           // Handle other errors
-          alert(error);
+          // alert(error);
+          console.log("error: ", error)
         }
     }
   }
