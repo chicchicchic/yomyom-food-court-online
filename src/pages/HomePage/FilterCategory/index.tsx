@@ -11,6 +11,7 @@ interface FilterCategoryProps {
 const FilterCategory: React.FC<FilterCategoryProps> = ({ handleChangeSelectedCategory }) => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("MAIN_COURSES");
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     fetchCategories();
@@ -18,7 +19,7 @@ const FilterCategory: React.FC<FilterCategoryProps> = ({ handleChangeSelectedCat
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/api/dish/category-list');
+      const response = await axios.get(`${apiUrl}/api/dish/category-list`);
 
       // console.log(response.data)
       setCategories(response.data);
