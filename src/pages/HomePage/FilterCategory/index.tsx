@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Tabs, Tab } from "@mui/material";
 import axios from "axios";
+import { useAuthToken } from "../../../utils/Auth/authUtils";
 
 
 interface FilterCategoryProps {
@@ -12,6 +13,8 @@ const FilterCategory: React.FC<FilterCategoryProps> = ({ handleChangeSelectedCat
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("MAIN_COURSES");
   const apiUrl = process.env.REACT_APP_API_URL;
+  const accessToken = useAuthToken();
+
 
   useEffect(() => {
     fetchCategories();
@@ -19,7 +22,11 @@ const FilterCategory: React.FC<FilterCategoryProps> = ({ handleChangeSelectedCat
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${apiUrl}/api/dish/category-list`);
+      const response = await axios.get(`${apiUrl}/api/dish/category-list`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       // console.log(response.data)
       setCategories(response.data);
