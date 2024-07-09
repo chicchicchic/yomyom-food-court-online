@@ -94,7 +94,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/reset-password-successfully" element={<ResetPasswordSuccessfully />} />
-          <Route path="/" element={<HomePage />} />
+          <Route path="/yomyom-food-court-online" element={<HomePage />} />
           {/* Add more routes as needed */}
         </Routes>
       </div>

@@ -1,9 +1,9 @@
 {
-  "homepage": "https://chicchicchic.github.io/yomyom-food-court-online" ,
+  "homepage": "https://chicchicchic.github.io/yomyom-food-court-online",
   "name": "online-food-court",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8082/api",
+  "proxy": "http://localhost:8082",
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
     "@emotion/react": "^11.11.4",
@@ -41,6 +41,7 @@
     "yup": "^1.4.0"
   },
   "scripts": {
+    "clean": "rimraf node_modules",
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -67,6 +68,8 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "rimraf": "^6.0.0",
     "sass": "^1.72.0",
     "sass-loader": "^14.1.1"
   }

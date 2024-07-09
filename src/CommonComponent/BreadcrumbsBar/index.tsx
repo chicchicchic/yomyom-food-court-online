@@ -24,7 +24,7 @@ const BreadcrumbsBar: React.FC = () => {
         fontSize: "1.2rem",
       }}
     >
-      <Link component={RouterLink} to="/">
+      <Link component={RouterLink} to="/yomyom-food-court-online">
         Home
       </Link>
 

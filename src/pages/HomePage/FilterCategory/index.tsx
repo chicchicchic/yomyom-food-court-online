@@ -18,7 +18,7 @@ const FilterCategory: React.FC<FilterCategoryProps> = ({ handleChangeSelectedCat
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/dish/category-list');
+      const response = await axios.get('/api/dish/category-list');
 
       // console.log(response.data)
       setCategories(response.data);

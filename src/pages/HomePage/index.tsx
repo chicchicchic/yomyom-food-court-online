@@ -139,7 +139,7 @@ const HomePage: React.FC = () => {
 
     try {
       const result = await axios.get(
-        `/dish/dishes-by-category?categoryName=${selectedCategory}&pageNumber=${
+        `/api/dish/dishes-by-category?categoryName=${selectedCategory}&pageNumber=${
           pagination.page - 1
         }&pageSize=${pagination.rowsPerPage}`
       );
@@ -176,7 +176,7 @@ const HomePage: React.FC = () => {
   };
   const getUserIdByEmail = async (email: string) => {
     try {
-      const response = await axios.get(`/user/find-by-email`, {
+      const response = await axios.get(`/api/user/find-by-email`, {
         params: { email },
         headers: {
           Authorization: `Bearer ${accessToken}`,
