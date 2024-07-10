@@ -18,6 +18,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import axios from "axios";
 import { useAuthToken } from "../../utils/Auth/authUtils";
+import { apiUrl } from "../../variable/globalVariable";
 
 interface ShippingInformation {
   userId: number;
@@ -67,7 +68,7 @@ const OrderTracking: React.FC = () => {
   }, []);
   const fetchListOrderItem = async (userId: number) => {
     try {
-      const response = await axios.get(`/order/get-order-items-by-user-id`, {
+      const response = await axios.get(`${apiUrl}/order/get-order-items-by-user-id`, {
         params: {
           status: "ACTIVE",
           userId: userId,

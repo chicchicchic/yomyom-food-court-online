@@ -126,7 +126,7 @@ function ContactUs() {
     }
   };
 
-  
+
   return (
     <>
       {!userEmail ? (
@@ -159,7 +159,7 @@ function ContactUs() {
                 textAlign: "center",
                 height: "auto", // Set height for the background image section
                 backgroundImage:
-                  'url("/images/ContactUs/socialMediaContactBackground.jpg")', // Replace with your image path
+                  `url(${process.env.PUBLIC_URL}/images/ContactUs/socialMediaContactBackground.jpg)`, // Replace with your image path
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 overflow: "hidden", // Hide overflow to contain blurred image

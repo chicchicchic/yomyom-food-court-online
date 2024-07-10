@@ -40,12 +40,12 @@ const EventsSliceBar: React.FC<EventsSliceBarProps> = (props) => {
   };
 
   const list = [
-    {name: "e1", image: 'url("./images/HomePage/IntroEventImages/e1.jpg")'},
-    {name: "e2", image: 'url("./images/HomePage/IntroEventImages/e2.png")'},
-    {name: "e3", image: 'url("./images/HomePage/IntroEventImages/e3.jpg")'},
-    {name: "e4", image: 'url("./images/HomePage/IntroEventImages/e4.jpg")'},
-    {name: "e5", image: 'url("./images/HomePage/IntroEventImages/e5.jpg")'},
-  ]
+    { name: "e1", image: `${process.env.PUBLIC_URL}/images/HomePage/IntroEventImages/e1.jpg` },
+    { name: "e2", image: `${process.env.PUBLIC_URL}/images/HomePage/IntroEventImages/e2.png` },
+    { name: "e3", image: `${process.env.PUBLIC_URL}/images/HomePage/IntroEventImages/e3.jpg` },
+    { name: "e4", image: `${process.env.PUBLIC_URL}/images/HomePage/IntroEventImages/e4.jpg` },
+    { name: "e5", image: `${process.env.PUBLIC_URL}/images/HomePage/IntroEventImages/e5.jpg` },
+  ];
 
   return (
     <div  style={{ marginBottom: "1rem" }}>
@@ -53,7 +53,7 @@ const EventsSliceBar: React.FC<EventsSliceBarProps> = (props) => {
         {list && list.map((item, index) => (
           <div key={index} className="card card-slider">
             <img
-              src='url("./images/Header/header-background.jpg")'
+              src={item.image}
               alt={item.name}
               className={`${classes.sliderImage}`}
             />

@@ -25,6 +25,7 @@ import PopupDishDetail from "./PopupDishDetail";
 import AddToBasketForm from "./PopupDishDetail/AddToBasketForm";
 import { getDecodeToken, useAuthToken } from "../../utils/Auth/authUtils";
 import CloseIcon from "@mui/icons-material/Close";
+import { apiUrl } from "../../variable/globalVariable";
 
 const useStyles = makeStyles({
   root: {
@@ -95,6 +96,7 @@ const HomePage: React.FC = () => {
     // console.log("userEmail", userEmail);
   }
 
+
   const [list, setList] = useState<Dish[]>([]);
 
   const [fullList, setFullList] = useState<Dish[]>([]);
@@ -139,7 +141,7 @@ const HomePage: React.FC = () => {
 
     try {
       const result = await axios.get(
-        `/api/dish/dishes-by-category?categoryName=${selectedCategory}&pageNumber=${
+        `${apiUrl}/dish/dishes-by-category?categoryName=${selectedCategory}&pageNumber=${
           pagination.page - 1
         }&pageSize=${pagination.rowsPerPage}`
       );
@@ -176,7 +178,7 @@ const HomePage: React.FC = () => {
   };
   const getUserIdByEmail = async (email: string) => {
     try {
-      const response = await axios.get(`/api/user/find-by-email`, {
+      const response = await axios.get(`${apiUrl}/user/find-by-email`, {
         params: { email },
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -298,7 +300,7 @@ const HomePage: React.FC = () => {
         basketItemList: [basketItemDTO], // Combine basketItemDTO into basketDTO
       };
 
-      await axios.post("/basket/add-item", basketDTO, {
+      await axios.post(`${apiUrl}/basket/add-item`, basketDTO, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json", // Set the content type to JSON

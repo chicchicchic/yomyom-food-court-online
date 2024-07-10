@@ -6,7 +6,7 @@ function ResetPasswordSuccessfully() {
       <Box
         component="img"
         alt="Reset Password Successfully"
-        src="/images/ResetPassword/reset-password-successfully.png"
+        src={`${process.env.PUBLIC_URL}/images/ResetPassword/reset-password-successfully.png`}
         sx={{
           width: "26rem",
           height: "14rem",

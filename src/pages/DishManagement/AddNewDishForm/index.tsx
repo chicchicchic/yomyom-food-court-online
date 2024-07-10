@@ -5,6 +5,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { addDishSchema } from '../../../validation/Dish/AddDishValidation';
 import * as Yup from "yup";
 import { getDecodeToken, useAuthToken } from '../../../utils/Auth/authUtils';
+import { apiUrl } from '../../../variable/globalVariable';
 
 // Define an interface for the form data
 interface FormData {
@@ -50,7 +51,7 @@ const AddNewDishForm = ({ onClose }: { onClose: () => void }) => {
     }, []);
     const fetchCategoryList = async () => {
         try {
-          const response = await axios.get('/dish/category-list',
+          const response = await axios.get(`${apiUrl}/dish/category-list`,
           {
                 headers: {
                     'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -121,7 +122,7 @@ const AddNewDishForm = ({ onClose }: { onClose: () => void }) => {
             formDataToSend.append('createdBy', userEmail ? userEmail : "Unknown");
             formDataToSend.append('updatedBy', userEmail ? userEmail : "Unknown");
 
-            await axios.post("/dish/create", formDataToSend, {
+            await axios.post(`${apiUrl}/dish/create`, formDataToSend, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Access-Control-Allow-Origin': '*',

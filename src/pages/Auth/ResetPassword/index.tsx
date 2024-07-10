@@ -10,6 +10,7 @@ import axios from "axios";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate, useParams } from "react-router-dom";
+import { apiUrl } from "../../../variable/globalVariable";
 
 const ResetPassword: React.FC = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const ResetPassword: React.FC = () => {
         return;
       }
 
-      await axios.post("/reset-password/reset-password", {
+      await axios.post(`${apiUrl}/reset-password/reset-password`, {
         token,
         newPassword: password,
       });

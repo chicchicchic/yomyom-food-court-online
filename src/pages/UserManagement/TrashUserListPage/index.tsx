@@ -23,6 +23,7 @@ import PaginationBar from "../../../CommonComponent/Pagination";
 import WarningIcon from '@mui/icons-material/Warning';
 import RestoreIcon from '@mui/icons-material/Restore';
 import { useAuthToken } from "../../../utils/Auth/authUtils";
+import { apiUrl } from "../../../variable/globalVariable";
 
 
 // Define an interface representing the structure of the data returned from the API
@@ -68,7 +69,7 @@ function TrashUserListPage() {
 
     try {
       const result = await axios.get(
-        `/user/trash?pageNumber=${pagination.page - 1}&pageSize=${pagination.rowsPerPage}`,
+        `${apiUrl}/user/trash?pageNumber=${pagination.page - 1}&pageSize=${pagination.rowsPerPage}`,
         {
           headers: {
               'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -117,7 +118,7 @@ function TrashUserListPage() {
   // [Handle] Restore
   const restoreItem = async (id: number) => {
     try {
-      await axios.put(`/user/restore/${id}`,
+      await axios.put(`${apiUrl}/user/restore/${id}`,
       {},
       {
         headers: {
@@ -133,7 +134,7 @@ function TrashUserListPage() {
 
   // [Display + Handle] Permanently-Delete
   const deleteItem = async (id: number) => {
-    await axios.delete(`/user/permanently-delete/${id}`,
+    await axios.delete(`${apiUrl}/user/permanently-delete/${id}`,
     {
       headers: {
           'Authorization': `Bearer ${accessToken}` // Set the token in the headers

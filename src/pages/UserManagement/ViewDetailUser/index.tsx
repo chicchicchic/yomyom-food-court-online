@@ -12,6 +12,7 @@ import {
 import { useAuthToken } from "../../../utils/Auth/authUtils";
 import moment from "moment";
 import Avatar from "react-avatar";
+import { apiUrl } from "../../../variable/globalVariable";
 
 
 
@@ -42,7 +43,7 @@ const ViewDetailUser: React.FC = () => {
   }, []);
   const fetchUserDetail = async () => {
     try {
-      const response = await axios.get<UserDetail>(`/user/${id}`, {
+      const response = await axios.get<UserDetail>(`${apiUrl}/user/${id}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`, // Set the token in the headers
         },

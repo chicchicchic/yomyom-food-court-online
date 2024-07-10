@@ -28,6 +28,7 @@ import AddNewUserForm from "./AddNewUserForm";
 import { useAuthToken } from "../../utils/Auth/authUtils";
 import SearchForm from "./SearchForm";
 import UpdateUserForm from "./UpdateUserForm";
+import { apiUrl } from "../../variable/globalVariable";
 
 
 
@@ -81,7 +82,7 @@ function UserManagement() {
 
     try {
       const result = await axios.get(
-        `/user?searchType=${searchType}&searchText=${searchText}&pageNumber=${pagination.page - 1}&pageSize=${pagination.rowsPerPage}`,
+        `${apiUrl}/user?searchType=${searchType}&searchText=${searchText}&pageNumber=${pagination.page - 1}&pageSize=${pagination.rowsPerPage}`,
         {
           headers: {
               'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -131,7 +132,7 @@ function UserManagement() {
   // [Display + Handle] Soft-Delete
   const deleteItem = async (id: number) => {
     try {
-      await axios.put(`/user/soft-delete/${id}`,
+      await axios.put(`${apiUrl}/user/soft-delete/${id}`,
       {},
       {
         headers: {

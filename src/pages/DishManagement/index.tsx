@@ -27,6 +27,7 @@ import SearchForm from "./SearchForm";
 import AddNewDishForm from "./AddNewDishForm";
 import UpdateDishForm from "./UpdateDishForm";
 import { useAuthToken } from "../../utils/Auth/authUtils";
+import { apiUrl } from "../../variable/globalVariable";
 
 
 
@@ -94,7 +95,7 @@ function DishManagement() {
 
     try {
       const result = await axios.get(
-        `/dish?searchType=${searchType}&searchText=${searchText}&pageNumber=${pagination.page - 1}&pageSize=${pagination.rowsPerPage}`,
+        `${apiUrl}/dish?searchType=${searchType}&searchText=${searchText}&pageNumber=${pagination.page - 1}&pageSize=${pagination.rowsPerPage}`,
         {
           headers: {
               'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -143,7 +144,7 @@ function DishManagement() {
   // [Display + Handle] Soft-Delete
   const deleteItem = async (id: number) => {
     try {
-      await axios.put(`/dish/soft-delete/${id}`,
+      await axios.put(`${apiUrl}/dish/soft-delete/${id}`,
       {},
       {
         headers: {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {DialogContentText, Typography } from '@mui/material';
+import { apiUrl } from '../../../variable/globalVariable';
 
 
 interface PopupDishDetailProps {
@@ -31,7 +32,7 @@ const PopupDishDetail: React.FC<PopupDishDetailProps> = ({ onClose, selectedDish
   }, [selectedDishId]);
   const fetchDishDetails = async () => {
     try {
-      const response = await axios.get(`/dish/${selectedDishId}`);
+      const response = await axios.get(`${apiUrl}/dish/${selectedDishId}`);
       setDish(response.data);
     } catch (error: any) {
       console.error('Error fetching dish details:', error);

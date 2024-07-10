@@ -28,6 +28,7 @@ import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 import axios from "axios";
 import { useAuthToken } from "../../../utils/Auth/authUtils";
 import PaginationBar from "../../../CommonComponent/Pagination";
+import { apiUrl } from "../../../variable/globalVariable";
 
 interface OrderItem {
   orderItemId: number;
@@ -85,7 +86,7 @@ function TrashOrderManagementListPage() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `/order-management/order-trash-list?pageNumber=${
+        `${apiUrl}/order-management/order-trash-list?pageNumber=${
           pagination.page - 1
         }&pageSize=${pagination.rowsPerPage}`,
         {

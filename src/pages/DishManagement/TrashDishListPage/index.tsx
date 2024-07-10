@@ -23,6 +23,7 @@ import PaginationBar from "../../../CommonComponent/Pagination";
 import WarningIcon from '@mui/icons-material/Warning';
 import RestoreIcon from '@mui/icons-material/Restore';
 import { useAuthToken } from "../../../utils/Auth/authUtils";
+import { apiUrl } from "../../../variable/globalVariable";
 
 
 // Define an interface representing the structure of the data returned from the API
@@ -69,7 +70,7 @@ function TrashDishListPage() {
 
     try {
       const result = await axios.get(
-        `/dish/trash?pageNumber=${pagination.page - 1}&pageSize=${pagination.rowsPerPage}`,
+        `${apiUrl}/dish/trash?pageNumber=${pagination.page - 1}&pageSize=${pagination.rowsPerPage}`,
         {
           headers: {
               'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -118,7 +119,7 @@ function TrashDishListPage() {
   // [Handle] Restore
   const restoreItem = async (id: number) => {
     try {
-      await axios.put(`/dish/restore/${id}`,
+      await axios.put(`${apiUrl}/dish/restore/${id}`,
       {},
       {
         headers: {
@@ -134,7 +135,7 @@ function TrashDishListPage() {
 
   // [Display + Handle] Permanently-Delete
   const deleteItem = async (id: number) => {
-    await axios.delete(`/dish/permanently-delete/${id}`,
+    await axios.delete(`${apiUrl}/dish/permanently-delete/${id}`,
     {
       headers: {
           'Authorization': `Bearer ${accessToken}` // Set the token in the headers

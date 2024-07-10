@@ -14,6 +14,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import axios from "axios";
+import { apiUrl } from "../../variable/globalVariable";
 
 const useStyles = makeStyles({
   root: {
@@ -84,7 +85,7 @@ function DetailOrderTracking() {
       }
 
       const result = await axios.get(
-        `/order/detail-order-tracking`,
+        `${apiUrl}/order/detail-order-tracking`,
         {
             params,
             headers: {

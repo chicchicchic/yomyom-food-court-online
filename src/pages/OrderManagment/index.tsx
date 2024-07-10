@@ -28,6 +28,7 @@ import moment from "moment";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 import axios from "axios";
+import { apiUrl } from "../../variable/globalVariable";
 
 interface OrderItem {
   orderItemId: number;
@@ -91,7 +92,7 @@ function OrderManagement() {
 
     try {
       const response = await axios.get(
-        `/order-management/order-list?pageNumber=${
+        `${apiUrl}/order-management/order-list?pageNumber=${
           pagination.page - 1
         }&pageSize=${pagination.rowsPerPage}`,
         {
@@ -127,7 +128,7 @@ function OrderManagement() {
   const fetchOrderItemStatusList = async () => {
     try {
       const response = await axios.get(
-        "/order-management/order-item-status-list",
+        `${apiUrl}/order-management/order-item-status-list`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -185,7 +186,7 @@ function OrderManagement() {
 
     try {
       await axios.put(
-        `/order-management/update-order-item-status/${orderItemId}`,
+        `${apiUrl}/order-management/update-order-item-status/${orderItemId}`,
         null,
         {
           params: {
@@ -237,7 +238,7 @@ function OrderManagement() {
   const updateOrderStatus = async (orderId: number) => {
     try {
       await axios.put(
-        `/order-management/update-order-status/${orderId}`,
+        `${apiUrl}/order-management/update-order-status/${orderId}`,
         null,
         {
           params: {

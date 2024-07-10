@@ -15,6 +15,7 @@ import * as Yup from 'yup';
 import { registerSchema } from "../../../validation/Auth/RegisterValidation";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { apiUrl } from "../../../variable/globalVariable";
 
 
 // Define Interface for Props
@@ -95,7 +96,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({open, onClose}) => {
       await registerSchema.validate(payload, { abortEarly: false });
 
       await axios.post(
-        "/auth/register",
+        `${apiUrl}/auth/register`,
         payload
       );
       await alert("You registered successfully!")

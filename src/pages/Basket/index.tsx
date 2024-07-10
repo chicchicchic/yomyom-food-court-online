@@ -29,6 +29,7 @@ import axios from "axios";
 import { getDecodeToken, useAuthToken } from "../../utils/Auth/authUtils";
 import { Link, useNavigate } from "react-router-dom";
 import PopupDishDetail from "./PopupDishDetail";
+import { apiUrl } from "../../variable/globalVariable";
 
 const useStyles = makeStyles(() => ({
   listBasketItem: {
@@ -101,7 +102,7 @@ const Basket: React.FC = () => {
   }, [userId]);
   const fetchDetailByEmail = async (email: string) => {
     try {
-      const response = await axios.get(`/user/find-by-email`, {
+      const response = await axios.get(`${apiUrl}/user/find-by-email`, {
         params: { email },
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -122,7 +123,7 @@ const Basket: React.FC = () => {
     setLoading(true); // Set loading state to true
 
     try {
-      const result = await axios.get(`/basket/basket-item-list/${userId}`, {
+      const result = await axios.get(`${apiUrl}/basket/basket-item-list/${userId}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`, // Set the token in the headers
         },
@@ -158,7 +159,7 @@ const Basket: React.FC = () => {
   const updateQuantity = async (dishId: number, newQuantity: number) => {
     try {
       const response = await axios.put(
-        `/basket/update-item-quantity/${dishId}`,
+        `${apiUrl}/basket/update-item-quantity/${dishId}`,
         {
           quantity: newQuantity,
           userId: userId,
@@ -186,7 +187,7 @@ const Basket: React.FC = () => {
   // [Handle] Remove Item From Basket
   const deleteItemFromBasket = async (dishId: number) => {
     try {
-      await axios.delete(`/basket/remove-item/${dishId}`, {
+      await axios.delete(`${apiUrl}/basket/remove-item/${dishId}`, {
         params: { userId },
         headers: {
           Authorization: `Bearer ${accessToken}`,

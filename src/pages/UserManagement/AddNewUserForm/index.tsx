@@ -4,6 +4,7 @@ import { Button, Container, Grid, Input, InputLabel, MenuItem, Select, SelectCha
 import * as Yup from "yup";
 import { getDecodeToken, useAuthToken } from '../../../utils/Auth/authUtils';
 import { addUserSchema } from '../../../validation/User/AddUserValidation';
+import { apiUrl } from '../../../variable/globalVariable';
 
 // Define an interface for the form data
 interface FormData {
@@ -54,7 +55,7 @@ const AddNewUserForm = ({ onClose }: { onClose: () => void }) => {
     }, []);
     const fetchRoleList = async () => {
         try {
-          const response = await axios.get('/user/role-list',
+          const response = await axios.get(`${apiUrl}/user/role-list`,
           {
                 headers: {
                     'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -115,7 +116,7 @@ const AddNewUserForm = ({ onClose }: { onClose: () => void }) => {
 
             await addUserSchema.validate(payload, { abortEarly: false });
 
-            await axios.post("/user/create", payload, {
+            await axios.post(`${apiUrl}/user/create`, payload, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }

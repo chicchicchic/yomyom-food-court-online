@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { setAvatar } from "../../reducers/Slice/userSlice";
 import { RootState } from "../../reducers";
 import { useSelector } from "react-redux";
+import { apiUrl } from "../../variable/globalVariable";
 
 const useStyles = makeStyles({
   root: {
@@ -101,14 +102,16 @@ function UserProfile() {
   }, [userEmail]);
   const fetchUserDetail = async (email: string) => {
     try {
-      const response = await axios.get(`/user/find-by-email`, {
+      const response = await axios.get(`${apiUrl}/user/find-by-email`, {
         params: { email },
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`
         },
       });
+      console.log("User Info: ", response.data);
+
       if (response.data) {
-        // console.log("User Info: ", response.data);
+        console.log("User Info: ", response.data);
         setUserInfo(response.data);
       }
     } catch (error) {
@@ -160,7 +163,7 @@ function UserProfile() {
       formData.append("email", userEmail!);
 
       try {
-        const response = await axios.post("/user/upload-avatar", formData, {
+        const response = await axios.post(`${apiUrl}/user/upload-avatar`, formData, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             "Content-Type": "multipart/form-data"

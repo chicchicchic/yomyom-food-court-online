@@ -37,6 +37,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import { setCartItemCount } from "../../reducers/Slice/cartSlice";
 import jsPDF from "jspdf";
+import { apiUrl } from "../../variable/globalVariable";
 
 interface Dish {
   dishId: number;
@@ -142,7 +143,7 @@ const PlaceOrder: React.FC = () => {
   }, []);
   const fetchDetailByEmail = async (email: string) => {
     try {
-      const response = await axios.get(`/user/find-by-email`, {
+      const response = await axios.get(`${apiUrl}/user/find-by-email`, {
         params: { email },
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -260,7 +261,7 @@ const PlaceOrder: React.FC = () => {
   // [Handle] Remove Item From Basket
   const deleteAllItemsFromBasket = async (userId: number) => {
     try {
-      await axios.delete(`/basket/clear-all-items-from-basket/${userId}`, {
+      await axios.delete(`${apiUrl}/basket/clear-all-items-from-basket/${userId}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -297,7 +298,7 @@ const PlaceOrder: React.FC = () => {
         updatedBy: customerInfo.email,
       };
 
-      const response = await axios.post("/order/create", orderDTO, {
+      const response = await axios.post(`${apiUrl}/order/create`, orderDTO, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

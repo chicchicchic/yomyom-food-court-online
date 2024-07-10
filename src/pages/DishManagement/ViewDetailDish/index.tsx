@@ -11,6 +11,7 @@ import {
     CardMedia,
 } from '@mui/material';
 import { useAuthToken } from '../../../utils/Auth/authUtils';
+import { apiUrl } from '../../../variable/globalVariable';
 
 interface DishDetail {
     dishId: number;
@@ -38,7 +39,7 @@ const ViewDetailDish: React.FC = () => {
     }, []);
     const fetchDishDetail = async () => {
         try {
-            const response = await axios.get<DishDetail>(`/dish/${id}`,
+            const response = await axios.get<DishDetail>(`${apiUrl}/dish/${id}`,
             {
                 headers: {
                     'Authorization': `Bearer ${accessToken}` // Set the token in the headers

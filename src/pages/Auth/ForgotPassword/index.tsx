@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
 import emailjs from "@emailjs/browser";
+import { apiUrl } from "../../../variable/globalVariable";
 
 interface ForgotPasswordProps {
   open: boolean;
@@ -48,7 +49,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ open, onClose }) => {
         return;
       }
 
-      const response = await axios.post("/reset-password/forgot-password", {
+      const response = await axios.post(`${apiUrl}/reset-password/forgot-password`, {
         email,
       });
       const { token } = response.data;

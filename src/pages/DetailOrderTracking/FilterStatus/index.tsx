@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Tabs, Tab } from "@mui/material";
 import axios from "axios";
 import { useAuthToken } from "../../../utils/Auth/authUtils";
+import { apiUrl } from "../../../variable/globalVariable";
 
 interface FilterStatusProps {
   handleChangeSelectedStatus: (status: string) => void;
@@ -22,7 +23,7 @@ const FilterStatus: React.FC<FilterStatusProps> = ({
 
   const fetchTypes = async () => {
     try {
-      const response = await axios.get("/order/order-item-status-list", {
+      const response = await axios.get(`${apiUrl}/order/order-item-status-list`, {
         headers: {
           Authorization: `Bearer ${accessToken}`, // Set the token in the headers
         },

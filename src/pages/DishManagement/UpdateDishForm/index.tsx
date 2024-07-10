@@ -5,6 +5,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import * as Yup from "yup";
 import { updateDishSchema } from '../../../validation/Dish/UpdateDishValidation';
 import { getDecodeToken, useAuthToken } from '../../../utils/Auth/authUtils';
+import { apiUrl } from '../../../variable/globalVariable';
 
 
 // Define an interface for the form data
@@ -52,7 +53,7 @@ const UpdateDishForm = ({ onClose, selectedDishId }: { onClose: () => void; sele
     }, []);
     const fetchCategoryList = async () => {
         try {
-          const response = await axios.get('/dish/category-list',
+          const response = await axios.get(`${apiUrl}/dish/category-list`,
           {
             headers: {
                 'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -73,7 +74,7 @@ const UpdateDishForm = ({ onClose, selectedDishId }: { onClose: () => void; sele
     };
     const fetchDishDetails = async () => {
         try {
-            const response = await axios.get(`/dish/${selectedDishId}`,
+            const response = await axios.get(`${apiUrl}/dish/${selectedDishId}`,
             {
                 headers: {
                     'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -134,7 +135,7 @@ const UpdateDishForm = ({ onClose, selectedDishId }: { onClose: () => void; sele
             formDataToSend.append('categoryEnum', formData.categoryEnum);
             formDataToSend.append('updatedBy', userEmail ?  userEmail : "Unknown");
 
-            await axios.put(`/dish/update/${selectedDishId}`,
+            await axios.put(`${apiUrl}/dish/update/${selectedDishId}`,
             formDataToSend,
             {
                 headers: {

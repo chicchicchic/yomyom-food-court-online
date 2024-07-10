@@ -4,6 +4,7 @@ import { Button, Container, Grid, Input, InputLabel, MenuItem, Select, SelectCha
 import * as Yup from "yup";
 import { getDecodeToken, useAuthToken } from '../../../utils/Auth/authUtils';
 import { updateUserSchema } from '../../../validation/User/UpdateUserValidation';
+import { apiUrl } from '../../../variable/globalVariable';
 
 // Define an interface for the form data
 interface FormData {
@@ -49,7 +50,7 @@ const UpdateUserForm = ({ onClose, selectedUserId }: { onClose: () => void; sele
     }, []);
     const fetchRoleList = async () => {
         try {
-          const response = await axios.get('/user/role-list',
+          const response = await axios.get(`${apiUrl}/user/role-list`,
           {
                 headers: {
                     'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -70,7 +71,7 @@ const UpdateUserForm = ({ onClose, selectedUserId }: { onClose: () => void; sele
     };
     const fetchUserDetails = async () => {
         try {
-            const response = await axios.get(`/user/${selectedUserId}`,
+            const response = await axios.get(`${apiUrl}/user/${selectedUserId}`,
             {
                 headers: {
                     'Authorization': `Bearer ${accessToken}` // Set the token in the headers
@@ -151,7 +152,7 @@ const UpdateUserForm = ({ onClose, selectedUserId }: { onClose: () => void; sele
             // console.log("Hello")
 
 
-            await axios.put(`/user/update/${selectedUserId}`, payload, {
+            await axios.put(`${apiUrl}/user/update/${selectedUserId}`, payload, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }

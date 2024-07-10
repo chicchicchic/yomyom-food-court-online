@@ -3,6 +3,7 @@ import { clearToken, setToken } from "../../reducers/Slice/authSlice";
 import { store } from "../../store";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { apiUrl } from "../../variable/globalVariable";
 
 interface DecodedToken {
   exp: number;
@@ -84,7 +85,7 @@ export const refreshToken = async () => {
 
   if (refreshTokenExisted) {
     try {
-      const response = await axios.post("/auth/refresh-token", null, {
+      const response = await axios.post(`${apiUrl}/auth/refresh-token`, null, {
         headers: {
           Authorization: `Bearer ${refreshTokenExisted}`, // Set the refresh token of current access token which stored in Redux
         },

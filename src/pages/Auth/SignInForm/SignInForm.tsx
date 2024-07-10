@@ -20,6 +20,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ForgotPassword from "../ForgotPassword";
+import { apiUrl } from "../../../variable/globalVariable";
 
 // Define Interface for Props
 interface SignInFormProps {
@@ -82,12 +83,12 @@ const SignInForm: React.FC<SignInFormProps> = ({ open, onClose }) => {
       await signInSchema.validate(payload, { abortEarly: false });
 
       const response = await axios.post(
-        "/auth/authenticate",
+        `${apiUrl}/auth/authenticate`,
         payload // Data to be sent in the request body
       );
 
       // If the authentication is successful, you can handle the response here
-      // console.log("Authentication successful: ", response.data);
+      console.log("Authentication successful: ", response.data);
       const { token, refreshToken } = response.data;
 
       // Dispatch both token and refreshToken

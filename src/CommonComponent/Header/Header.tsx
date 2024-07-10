@@ -16,7 +16,7 @@ import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import ListAltIcon from "@mui/icons-material/ListAlt";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
@@ -35,11 +35,12 @@ import { RootState } from "../../reducers";
 import { useDispatch } from "react-redux";
 import { setCartItemCount } from "../../reducers/Slice/cartSlice";
 import { clearAvatar, setAvatar } from "../../reducers/Slice/userSlice";
+import { apiUrl } from "../../variable/globalVariable";
 
 const useStyles: any = makeStyles(() => ({
   // Whole header
   appBar: {
-    backgroundImage: 'url("./images/Header/header-background.jpg")',
+    backgroundImage: `url(${process.env.PUBLIC_URL}/images/Header/header-background.jpg)`,
     backgroundSize: "cover",
     height: "12rem",
     minHeight: "10rem",
@@ -170,13 +171,13 @@ const Header = () => {
   }, [accessToken]);
   const fetchDetailByEmail = async (email: string) => {
     try {
-      const response = await axios.get(`/user/find-by-email`, {
+      const response = await axios.get(`${apiUrl}/user/find-by-email`, {
         params: { email },
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // console.log("User Details Basket:", response.data);
+      console.log("User Details:", response.data);
       if (response.data) {
         setCustomerInfo(response.data);
 
@@ -196,11 +197,14 @@ const Header = () => {
   };
   const fetchBasketItemCount = async (userId: number) => {
     try {
-      const response = await axios.get(`/basket/count-all-items/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await axios.get(
+        `${apiUrl}/basket/count-all-items/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       // console.log("Count Items In Basket: ", response.data)
       if (response.data) {
         dispatch(setCartItemCount(response.data)); // Dispatch action to set count in Redux
@@ -247,12 +251,12 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       // await persistor.purge(); // Clear the persisted state // Reset the persisted state upon logout
-      // await axios.post("/user/logout")
+      // await axios.post("${apiUrl}/user/logout")
       // sessionStorage.removeItem("token");
       await removeTokenToLogout();
       await dispatch(setCartItemCount(0)); // Dispatch action to set count in Redux
       await dispatch(clearAvatar());
-      window.location.href = "/";
+      window.location.href = "/yomyom-food-court-online"; // Go to Home Page
     } catch (error) {
       alert("Logout Error is: " + error);
     }
@@ -262,13 +266,13 @@ const Header = () => {
   const handleLogoutMobile = async () => {
     try {
       // await persistor.purge(); // Clear the persisted state // Reset the persisted state upon logout
-      // await axios.post("/user/logout")
+      // await axios.post("${apiUrl}/user/logout")
       // sessionStorage.removeItem("token");
       await removeTokenToLogout();
       await dispatch(setCartItemCount(0)); // Dispatch action to set count in Redux
       await dispatch(clearAvatar());
       await setDrawerOpen(false);
-      window.location.href = "/";
+      window.location.href = "/yomyom-food-court-online"; // Go to Home Page
     } catch (error) {
       alert("Logout Error is: " + error);
     }
@@ -282,7 +286,7 @@ const Header = () => {
           <Link to="/" style={{ textDecoration: "none" }}>
             <div className={classes.leftGroup}>
               <img
-                src="/images/Header/logoApp.png"
+                src={`${process.env.PUBLIC_URL}/images/Header/logoApp.png`}
                 alt="Logo"
                 className={classes.logo}
               />
@@ -541,7 +545,6 @@ const Header = () => {
                           Dish Management
                         </Link>
                       </MenuItem>
-
                     </div>
                   )}
 
@@ -655,7 +658,6 @@ const Header = () => {
           <List>
             {isLogin && (
               <ListItem>
-
                 {avatar && avatar !== null ? (
                   <Avatar
                     alt={customerInfo.firstName}
@@ -679,9 +681,12 @@ const Header = () => {
                   />
                 )}
 
-                <Typography variant="h5" sx={{
-                  marginLeft: "1rem"
-                }}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    marginLeft: "1rem",
+                  }}
+                >
                   Hi,{" "}
                   <b>
                     {customerInfo.firstName

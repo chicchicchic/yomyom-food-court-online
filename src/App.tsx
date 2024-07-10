@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { makeStyles } from '@mui/styles';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// When deploying a react application to GitHub Pages, you may encounter issues with routing because GitHub Pages only serves the index.html file for the root path and doesn't support client-side routing out of the box. To resolve this issue, you can use the HashRouter from react-router-dom instead of BrowserRouter. HashRouter uses the hash portion of the URL to keep the UI in sync with the URL, which works well with GitHub Pages.
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // (old code--)
 import Header from "./CommonComponent/Header/Header";
 import Footer from "./CommonComponent/Footer/Footer";
 import ScrollToTopOnPageChange from "./CommonComponent/ScrollToTopOnPageChange/ScrollToTopOnPageChange";
@@ -94,7 +96,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/reset-password-successfully" element={<ResetPasswordSuccessfully />} />
-          <Route path="/yomyom-food-court-online" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           {/* Add more routes as needed */}
         </Routes>
       </div>
